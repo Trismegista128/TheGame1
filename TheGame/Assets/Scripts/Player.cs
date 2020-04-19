@@ -16,12 +16,6 @@ public class Player : MonoBehaviour
         tr = GetComponent<Transform>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void FixedUpdate()
     {
         var x = 0;
@@ -39,5 +33,13 @@ public class Player : MonoBehaviour
 
         //rb.(movement * Speed);
         tr.position += movement * Time.deltaTime * Speed;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Enemy")
+        {
+
+        }
     }
 }
