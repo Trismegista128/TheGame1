@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         var x = 0;
         var y = 0;

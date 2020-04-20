@@ -4,23 +4,29 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public float speed;
+
+    private Transform target;
+    private Transform tr;
     private GameManager manager;
+    
     // Start is called before the first frame update
     void Start()
     {
-        var managerObject = GameObject.FindGameObjectWithTag("GameController");
-        manager = managerObject.GetComponent<GameManager>();
+        manager = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameManager>();
+        target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        tr = GetComponent<Transform>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        tr.position = Vector2.MoveTowards(tr.position, target.position, speed * Time.deltaTime);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             manager.EnemyKilled();
             Destroy(this.gameObject);
