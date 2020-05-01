@@ -155,4 +155,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Speed: 10
   Lifes: 5
+  FireRate: 0.5
   BulletPrefab: {fileID: 0}

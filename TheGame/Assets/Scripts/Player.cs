@@ -6,12 +6,14 @@ public class Player : MonoBehaviour
 {
     public float Speed;
     public int Lifes;
+    public float FireRate;
     public GameObject BulletPrefab;
 
     private Transform tr;
     private Animator anim;
     private GameManager manager;
     private HealthBar healthBarObject;
+    private float lastShoot;
 
     // Start is called before the first frame update
     void Start()
@@ -45,10 +47,9 @@ public class Player : MonoBehaviour
 
         tr.position += movement * Time.deltaTime * Speed;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
-            var bullet = (Instantiate(BulletPrefab, tr.position, new Quaternion())) as GameObject;
-            bullet.GetComponent<Bullet>().Initialize(movement);
+            Fire(movement);
         }
     }
 
@@ -64,6 +65,16 @@ public class Player : MonoBehaviour
         {
             LoseLife();
             Destroy(collision.transform.gameObject);
+        }
+    }
+
+    private void Fire(Vector2 direction)
+    {
+        if (Time.time > FireRate + lastShoot)
+        {
+            var bullet = (Instantiate(BulletPrefab, tr.position, new Quaternion())) as GameObject;
+            bullet.GetComponent<Bullet>().Initialize(direction);
+            lastShoot = Time.time;
         }
     }
 
