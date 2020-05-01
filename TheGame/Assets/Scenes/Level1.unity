@@ -183,6 +183,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5885595276193718851, guid: 0c609410ffbde2344804f488a8d446e5,
+        type: 3}
+      propertyPath: Lifes
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5885595276193718855, guid: 0c609410ffbde2344804f488a8d446e5,
         type: 3}
       propertyPath: m_Name
@@ -699,7 +704,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5016ba35cedb6543952c7de659ec38b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  Speed: 3
+  Lifes: 2
 --- !u!50 &1096558147
 Rigidbody2D:
   serializedVersion: 4
@@ -843,7 +849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5016ba35cedb6543952c7de659ec38b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  Speed: 5
+  Lifes: 2
 --- !u!50 &1129474682
 Rigidbody2D:
   serializedVersion: 4

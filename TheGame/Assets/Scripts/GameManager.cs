@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -22,5 +23,15 @@ public class GameManager : MonoBehaviour
     public void EnemyKilled()
     {
         enemiesCount--;
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void GameOver()
+    {
+        SceneManager.LoadScene(0);
     }
 }

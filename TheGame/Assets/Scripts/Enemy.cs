@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed;
+    public float Speed;
+    public int Lifes;
 
     private Transform target;
     private Transform tr;
@@ -21,15 +22,27 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        tr.position = Vector2.MoveTowards(tr.position, target.position, speed * Time.deltaTime);
+        tr.position = Vector2.MoveTowards(tr.position, target.position, Speed * Time.deltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            manager.EnemyKilled();
-            Destroy(this.gameObject);
+            if (Lifes > 1) LoseLife();
+            else OnKilled();
         }
+    }
+
+    private void LoseLife()
+    {
+        Lifes--;
+        Debug.Log("Enemy lost life");
+    }
+
+    private void OnKilled()
+    {
+        manager.EnemyKilled();
+        Destroy(this.gameObject);
     }
 }

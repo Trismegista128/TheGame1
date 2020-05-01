@@ -5,17 +5,21 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float Speed;
+    public int Lifes;
 
-    private Rigidbody2D rb;
+
     private Transform tr;
     private Animator anim;
+    private GameManager manager;
 
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         tr = GetComponent<Transform>();
         anim = GetComponent<Animator>();
+
+        var managerObject = GameObject.FindGameObjectWithTag("GameController");
+        manager = managerObject.GetComponent<GameManager>();
     }
 
     private void FixedUpdate()
@@ -35,16 +39,22 @@ public class Player : MonoBehaviour
 
         var movement = new Vector3(x, y, 0f);
 
-        //rb.(movement * Speed);
         tr.position += movement * Time.deltaTime * Speed;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.tag == "Enemy")
+        if (collision.gameObject.tag == "Enemy")
         {
-
+            if (Lifes > 1) LoseLife();
+            else manager.GameOver();
         }
+    }
+
+    private void LoseLife()
+    {
+        Lifes--;
+        Debug.Log("Player lost life");
     }
 
     private void SetAnimation(int x, int y)
