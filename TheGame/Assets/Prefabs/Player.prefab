@@ -154,4 +154,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 10
-  Lifes: 0
+  Lifes: 5
+  BulletPrefab: {fileID: 0}
