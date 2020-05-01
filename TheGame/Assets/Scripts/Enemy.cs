@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     public float Speed;
     public int Lifes;
+    public GameObject BulletPrefab;
 
     private Transform target;
     private Transform tr;
@@ -22,22 +23,26 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        tr.position = Vector2.MoveTowards(tr.position, target.position, Speed * Time.deltaTime);
+        var movement = Vector2.MoveTowards(tr.position, target.position, Speed * Time.deltaTime);
+        tr.position = movement;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.tag == "PlayerBullet")
         {
-            if (Lifes > 1) LoseLife();
-            else OnKilled();
+            LoseLife();
+            Destroy(collision.transform.gameObject);
         }
     }
 
     private void LoseLife()
     {
-        Lifes--;
-        Debug.Log("Enemy lost life");
+        Debug.Log("Enemy lost one life");
+        if (Lifes > 1)
+            Lifes--;
+        else
+            OnKilled();
     }
 
     private void OnKilled()

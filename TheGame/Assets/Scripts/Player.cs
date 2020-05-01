@@ -6,7 +6,7 @@ public class Player : MonoBehaviour
 {
     public float Speed;
     public int Lifes;
-
+    public GameObject BulletPrefab;
 
     private Transform tr;
     private Animator anim;
@@ -40,21 +40,36 @@ public class Player : MonoBehaviour
         var movement = new Vector3(x, y, 0f);
 
         tr.position += movement * Time.deltaTime * Speed;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            var bullet = (Instantiate(BulletPrefab, tr.position, new Quaternion())) as GameObject;
+            bullet.GetComponent<Bullet>().Initialize(movement);
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Enemy")
+            LoseLife();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "EnemyBullet")
         {
-            if (Lifes > 1) LoseLife();
-            else manager.GameOver();
+            LoseLife();
+            Destroy(collision.transform.gameObject);
         }
     }
 
     private void LoseLife()
     {
-        Lifes--;
-        Debug.Log("Player lost life");
+        Debug.Log("Player lost one life");
+        if (Lifes > 1)
+            Lifes--;
+        else
+            manager.GameOver();
     }
 
     private void SetAnimation(int x, int y)

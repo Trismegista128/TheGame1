@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Door
   - Enemy
+  - PlayerBullet
+  - EnemyBullet
+  - Walls
+  - Obstacle
   layers:
   - Default
   - TransparentFX
@@ -54,4 +58,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2586983933
+    locked: 0
+  - name: Foreground
+    uniqueID: 2754285659
     locked: 0
