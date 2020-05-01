@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Doors : MonoBehaviour
 {
@@ -36,7 +35,7 @@ public class Doors : MonoBehaviour
     {
         if(AlreadyOpened && collision.tag == "Player")
         {
-            SceneManager.LoadScene(0);
+            manager.NextLevel();
         }
     }
 }
