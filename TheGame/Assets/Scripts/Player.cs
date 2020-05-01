@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     private Transform tr;
     private Animator anim;
     private GameManager manager;
+    private HealthBar healthBarObject;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,9 @@ public class Player : MonoBehaviour
 
         var managerObject = GameObject.FindGameObjectWithTag("GameController");
         manager = managerObject.GetComponent<GameManager>();
+
+        healthBarObject = GameObject.Find("Life container").GetComponent<HealthBar>();
+        healthBarObject.UpdateHealthbar(Lifes);
     }
 
     private void FixedUpdate()
@@ -70,6 +74,8 @@ public class Player : MonoBehaviour
             Lifes--;
         else
             manager.GameOver();
+
+        healthBarObject.UpdateHealthbar(Lifes);
     }
 
     private void SetAnimation(int x, int y)
