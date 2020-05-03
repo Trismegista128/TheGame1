@@ -74,12 +74,12 @@ SpriteRenderer:
   m_SortingLayerID: -1707983363
   m_SortingLayer: 4
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 23665c73e56cb37429e4cb81d2dbfac5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e7206d12daabc374e934a95da7aa7b4d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.5555556, y: 2.5555556}
+  m_Size: {x: 1.4, y: 2.3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -138,8 +138,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.7789062, y: 1.2336259}
-  m_Size: {x: 1.0931408, y: 2.0722618}
+  m_Offset: {x: 0.69816434, y: 1.1404619}
+  m_Size: {x: 0.9316571, y: 1.8859339}
   m_Direction: 0
 --- !u!114 &5885595276193718851
 MonoBehaviour:
@@ -153,7 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d064a9c8d5fa07c48a5698845405a088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
   Lifes: 5
+  Speed: 10
   FireRate: 0.5
+  DurationOfImmunityAfterHit: 0
   BulletPrefab: {fileID: 0}
