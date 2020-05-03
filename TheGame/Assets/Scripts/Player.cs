@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private GameManager manager;
     private HealthBar healthBarObject;
     private float lastShoot;
+    private Vector3 lastMovement;
 
     // Start is called before the first frame update
     void Start()
@@ -46,12 +47,14 @@ public class Player : MonoBehaviour
         SetAnimation(x, y);
 
         var movement = new Vector3(x, y, 0f);
+        if (movement != Vector3.zero)
+            lastMovement = movement;
 
         tr.position += movement * Time.deltaTime * Speed;
 
         if (Input.GetKey(KeyCode.Space))
         {
-            Fire(movement);
+            Fire(lastMovement, movement);
         }
     }
 
@@ -70,12 +73,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Fire(Vector2 direction)
+    private void Fire(Vector2 shootDirection, Vector2 currentPlayerMovement)
     {
         if (Time.time > FireRate + lastShoot)
         {
+            //deal with the problem that there was no movement yet.
+            if (shootDirection == Vector2.zero) shootDirection = new Vector2(-1, 0);
+
+            //deal with the problem that there is no movement now and player was moving diagonaly.
+            if (shootDirection.x != 0 && shootDirection.y != 0 && currentPlayerMovement == Vector2.zero)
+                shootDirection.y = 0;
+
             var bullet = (Instantiate(BulletPrefab, tr.position, new Quaternion())) as GameObject;
-            bullet.GetComponent<Bullet>().Initialize(direction);
+            bullet.GetComponent<Bullet>().Initialize(shootDirection);
             lastShoot = Time.time;
         }
     }
