@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class HealthBar : MonoBehaviour
 {
+    public bool IsUpdateRequired;
 
     private Dictionary<string, SpriteRenderer> hearths;
     // Start is called before the first frame update
@@ -18,10 +19,14 @@ public class HealthBar : MonoBehaviour
 
             hearths.Add(component.name, component);
         }
+
+        IsUpdateRequired = true;
     }
 
     public void UpdateHealthbar(int lifesLeft)
     {
+        if (!IsUpdateRequired) IsUpdateRequired = false;
+
         foreach(var heart in hearths)
         {
             heart.Value.gameObject.SetActive(false);

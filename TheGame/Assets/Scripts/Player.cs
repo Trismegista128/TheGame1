@@ -25,11 +25,13 @@ public class Player : MonoBehaviour
         manager = managerObject.GetComponent<GameManager>();
 
         healthBarObject = GameObject.Find("Life container").GetComponent<HealthBar>();
-        healthBarObject.UpdateHealthbar(Lifes);
     }
 
     private void FixedUpdate()
     {
+        if(healthBarObject.IsUpdateRequired)
+            healthBarObject.UpdateHealthbar(Lifes);
+
         var x = 0;
         var y = 0;
 
@@ -80,7 +82,6 @@ public class Player : MonoBehaviour
 
     private void LoseLife()
     {
-        Debug.Log("Player lost one life");
         if (Lifes > 1)
             Lifes--;
         else
