@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3050713660370953248}
   - component: {fileID: 3050713660370953249}
   - component: {fileID: 3050713660370953250}
-  - component: {fileID: 3050713660370953251}
+  - component: {fileID: -3895164806519430326}
   m_Layer: 11
   m_Name: Enemy-Bond
   m_TagString: Enemy
@@ -121,7 +121,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &3050713660370953251
+--- !u!114 &-3895164806519430326
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,8 +130,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3050713660370953260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5016ba35cedb6543952c7de659ec38b, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b8bdd8b4f961e247b43e354334fdd30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 5
-  Lifes: 4
+  Speed: 4
+  Lifes: 5
+  Target: {fileID: 0}
+  Tr: {fileID: 0}
+  FireRate: 1
+  BulletPrefab: {fileID: 7824520923232156634, guid: 7dd413ea6ab57624f85c6c1fe466400f,
+    type: 3}
