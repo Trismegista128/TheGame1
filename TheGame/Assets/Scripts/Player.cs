@@ -1,19 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float Speed;
     public int Lifes;
+    public float Speed;
     public float FireRate;
+    public float DurationOfImmunityAfterHit;
     public GameObject BulletPrefab;
 
     private Transform tr;
+    private SpriteRenderer sr;
     private Animator anim;
     private GameManager manager;
     private HealthBar healthBarObject;
     private float lastShoot;
+    private float immuneTime;
     private Vector3 lastMovement;
 
     // Start is called before the first frame update
@@ -32,6 +33,9 @@ public class Player : MonoBehaviour
     {
         if(healthBarObject.IsUpdateRequired)
             healthBarObject.UpdateHealthbar(Lifes);
+
+        if (immuneTime > 0)
+            immuneTime -= Time.deltaTime;
 
         var x = 0;
         var y = 0;
@@ -92,12 +96,19 @@ public class Player : MonoBehaviour
 
     private void LoseLife()
     {
-        if (Lifes > 1)
-            Lifes--;
-        else
-            manager.GameOver();
+        if (immuneTime <= 0)
+        {
+            if (Lifes > 1)
+            {
+                Lifes--;
+                immuneTime = DurationOfImmunityAfterHit;
+            }
 
-        healthBarObject.UpdateHealthbar(Lifes);
+            else
+                manager.GameOver();
+
+            healthBarObject.UpdateHealthbar(Lifes);
+        }
     }
 
     private void SetAnimation(int x, int y)
@@ -111,5 +122,7 @@ public class Player : MonoBehaviour
         if (aL != (x == -1)) anim.SetBool("Left", x == -1);
         if (aU != (y ==  1)) anim.SetBool("Up", y == 1);
         if (aD != (y == -1)) anim.SetBool("Down", y == -1);
+
+        anim.SetFloat("ImmuneTime", immuneTime);
     }
 }
