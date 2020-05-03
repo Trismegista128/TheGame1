@@ -4,38 +4,41 @@ using UnityEngine;
 
 public class Doors : MonoBehaviour
 {
-    public Sprite StateOpen;
-    public Sprite StateClosed;
-
-    private bool AlreadyOpened;
-    private SpriteRenderer sr;
+    private GameObject doorObject;
     private GameManager manager;
+
+    private bool alreadyOpened;
+
     // Start is called before the first frame update
     void Start()
     {
         var managerObject = GameObject.FindGameObjectWithTag("GameController");
         manager = managerObject.GetComponent<GameManager>();
 
-        sr = GetComponent<SpriteRenderer>();
-        sr.sprite = StateClosed;
-        AlreadyOpened = false;
+        doorObject = this.gameObject.transform.GetChild(0).gameObject;
+        SetDoorsState(areOpen: false);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(manager.EnemiesCount() <= 0 && !AlreadyOpened)
+        if (manager.EnemiesCount() <= 0 && !alreadyOpened)
         {
-            AlreadyOpened = true;
-            sr.sprite = StateOpen;
+            SetDoorsState(areOpen: true);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(AlreadyOpened && collision.tag == "Player")
+        if (alreadyOpened && collision.tag == "Player")
         {
             manager.NextLevel();
         }
+    }
+
+    private void SetDoorsState(bool areOpen)
+    {
+        alreadyOpened = areOpen;
+        doorObject.SetActive(!areOpen);
     }
 }
