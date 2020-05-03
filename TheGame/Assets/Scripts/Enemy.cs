@@ -38,7 +38,6 @@ public class Enemy : MonoBehaviour
 
     private void LoseLife()
     {
-        Debug.Log("Enemy lost one life");
         if (Lifes > 1)
             Lifes--;
         else

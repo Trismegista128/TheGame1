@@ -11,20 +11,18 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("hit col");
         var collisionTag = collision.gameObject.tag;
         DestroyOnHit(collisionTag);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("hit trig");
         var collisionTag = collision.gameObject.tag;
         DestroyOnHit(collisionTag);
     }
 
     private void DestroyOnHit(string tag)
     {
-        if (tag == "Walls" || tag == "Obstacle" || tag == "Door") Destroy(this.gameObject);
+        if (tag == "Walls" || tag == "Obstacle") Destroy(this.gameObject);
     }
 }
