@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6086642914408260900}
   - component: {fileID: 6086642914408260903}
-  - component: {fileID: 6086642914408260902}
+  - component: {fileID: 1423106379113227518}
   m_Layer: 9
   m_Name: Table
   m_TagString: Obstacle
@@ -82,8 +82,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &6086642914408260902
-BoxCollider2D:
+--- !u!70 &1423106379113227518
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -95,16 +95,6 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.8481989, y: 1.4543226}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 1.7, y: 2.6}
-    newSize: {x: 1.8888888, y: 2.8888888}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.6886024, y: 2.4683905}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0.8431978, y: 1.4072067}
+  m_Size: {x: 1.5145206, y: 2.412388}
+  m_Direction: 0
