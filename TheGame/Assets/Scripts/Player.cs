@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public float Speed;
     public float FireRate;
     public float DurationOfImmunityAfterHit;
+    public int PlayerSpriteSizeInPixels;
     public GameObject BulletPrefab;
 
     private Transform tr;
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     private HealthBar healthBarObject;
     private float immuneTime;
     private Vector3 lastMovement;
+    private int lastDirection = -1;
 
     private ShootingHelper shootingHelper;
 
@@ -23,7 +25,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         tr = GetComponent<Transform>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
 
         var managerObject = GameObject.FindGameObjectWithTag("GameController");
         manager = managerObject.GetComponent<GameManager>();
@@ -52,9 +54,11 @@ public class Player : MonoBehaviour
         x = moveRight ? 1 : moveLeft ? -1 : 0;
         y = moveUp ? 1 : moveDown ? -1 : 0;
 
+        FlipDirection(x);
         SetAnimation(x, y);
 
         var movement = new Vector3(x, y, 0f);
+
         if (movement != Vector3.zero)
             lastMovement = movement;
 
@@ -98,16 +102,29 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void FlipDirection(int x)
+    {
+        var direction = x;
+        if(lastDirection != direction && direction != 0)
+        {
+            lastDirection = direction;
+            transform.localScale = new Vector2(direction, transform.localScale.y);
+        }
+    }
+
     private void SetAnimation(int x, int y)
     {
-        var aR = anim.GetBool("Right");
-        var aL = anim.GetBool("Left");
+        //anim.SetBool("Horizontal", x != 0);
+        //anim.SetBool("Up", y == 1);
+        //anim.SetBool("Down", y == -1);
+
+
+        var hz = anim.GetBool("Horizontal");
         var aU = anim.GetBool("Up");
         var aD = anim.GetBool("Down");
 
-        if (aR != (x ==  1)) anim.SetBool("Right", x == 1);
-        if (aL != (x == -1)) anim.SetBool("Left", x == -1);
-        if (aU != (y ==  1)) anim.SetBool("Up", y == 1);
+        if (hz != (x != 0)) anim.SetBool("Horizontal", x != 0);
+        if (aU != (y == 1)) anim.SetBool("Up", y == 1);
         if (aD != (y == -1)) anim.SetBool("Down", y == -1);
 
         anim.SetFloat("ImmuneTime", immuneTime);

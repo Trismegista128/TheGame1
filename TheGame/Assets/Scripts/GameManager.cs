@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public int PixelsInUnit = 10;
+
     private int enemiesCount;
     private Dictionary<int, GameObject> doors;
 

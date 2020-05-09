@@ -89,14 +89,14 @@ namespace Assets.Scripts.Helpers
                 //Shooting Down
                 if (shootDirection.y < 0)
                 {
-                    positionOfBullet.x = 0.33f;
+                    positionOfBullet.x = 0f;
                     positionOfBullet.y = 1;
                 }
 
                 //Shooting Up
                 else
                 {
-                    positionOfBullet.x = 1;
+                    positionOfBullet.x = 0f;
                     positionOfBullet.y = 2;
                 }
             }
