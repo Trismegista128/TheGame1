@@ -327,11 +327,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doors
       objectReference: {fileID: 0}
-    - target: {fileID: 7373335443220970625, guid: 611f438d98a934a49910d548f749d312,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 7373335443220970653, guid: 611f438d98a934a49910d548f749d312,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1320,7 +1315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1091402489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2291,11 +2286,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Doors
       objectReference: {fileID: 0}
-    - target: {fileID: 7373335443220970625, guid: 611f438d98a934a49910d548f749d312,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
     - target: {fileID: 7373335443220970653, guid: 611f438d98a934a49910d548f749d312,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3026,6 +3016,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SmartEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 8655406194042097340, guid: 4a1647f87969f5a48ae52622fa8905d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8655406194042097341, guid: 4a1647f87969f5a48ae52622fa8905d7,
         type: 3}

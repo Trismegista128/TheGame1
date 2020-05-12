@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Doors : MonoBehaviour
 {
-    private GameObject doorObject;
+    private Animator doorAnimator;
     private GameManager manager;
-
+    private SpriteRenderer renderer;
     private bool alreadyOpened;
 
     // Start is called before the first frame update
@@ -15,7 +15,10 @@ public class Doors : MonoBehaviour
         var managerObject = GameObject.FindGameObjectWithTag("GameController");
         manager = managerObject.GetComponent<GameManager>();
 
-        doorObject = this.gameObject.transform.GetChild(0).gameObject;
+        doorAnimator = GetComponent<Animator>();
+        renderer = GetComponent<SpriteRenderer>();
+
+        renderer.enabled = true;
         SetDoorsState(areOpen: false);
     }
 
@@ -39,6 +42,20 @@ public class Doors : MonoBehaviour
     private void SetDoorsState(bool areOpen)
     {
         alreadyOpened = areOpen;
-        doorObject.SetActive(!areOpen);
+        doorAnimator.SetBool("Activate", areOpen);
+    }
+
+    //private IEnumerator PlayAndDisappear(bool areOpen)
+    //{
+    //    alreadyOpened = areOpen;
+    //    doorAnimator.Play("Activate");
+    //    yield return new WaitForSeconds(doorAnimator.);
+    //    doorObject.SetActive(!areOpen);
+    //    //doorAnimator.SetBool("Activate", areOpen);
+    //}
+
+    public void AnimationEnd()
+    {
+        renderer.enabled = false;
     }
 }
