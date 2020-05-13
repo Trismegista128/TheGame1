@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             primaryWeaponSelected = !primaryWeaponSelected;
+            manager.WeaponSwitch(primaryWeaponSelected);
         }
 
         if (Input.GetKey(KeyCode.Space))

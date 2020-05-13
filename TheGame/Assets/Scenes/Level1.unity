@@ -1088,6 +1088,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PixelsInUnit: 10
+  PrimaryWeaponSlot: {fileID: 1109126341}
+  SecondaryWeaponSlot: {fileID: 1698882901}
+  ActiveWeaponSprite: {fileID: 21300000, guid: eaf58009d34397048aa695e40cf54a52, type: 3}
+  InactiveWeaponSprite: {fileID: 21300000, guid: b2559a316ca46e24b82cfeb49eea51c8,
+    type: 3}
 --- !u!4 &807951003
 Transform:
   m_ObjectHideFlags: 0

@@ -1,11 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public int PixelsInUnit = 10;
+    public SpriteRenderer PrimaryWeaponSlot;
+    public SpriteRenderer SecondaryWeaponSlot;
+    public Sprite ActiveWeaponSprite;
+    public Sprite InactiveWeaponSprite;
 
     private int enemiesCount;
     private Dictionary<int, GameObject> doors;
@@ -29,6 +32,12 @@ public class GameManager : MonoBehaviour
         enemiesCount--;
     }
 
+    public void WeaponSwitch(bool isPrimary)
+    {
+        PrimaryWeaponSlot.sprite = isPrimary ? ActiveWeaponSprite : InactiveWeaponSprite;
+        SecondaryWeaponSlot.sprite = isPrimary ? InactiveWeaponSprite : ActiveWeaponSprite;
+    }
+
     public void NextLevel()
     {
         SceneManager.LoadScene(0);
@@ -43,7 +52,7 @@ public class GameManager : MonoBehaviour
     {
         doors = new Dictionary<int, GameObject>();
         var doorsList = GameObject.FindGameObjectsWithTag("Door");
-        
+
         for (var i = 0; i < doorsList.Length; i++)
         {
             doors.Add(i, doorsList[i]);
