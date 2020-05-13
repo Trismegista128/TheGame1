@@ -63,8 +63,9 @@ public class Player : MonoBehaviour
         SetAnimation(x, y);
 
         var movement = new Vector3(x, y, 0f);
+        var isNoMovement = movement == Vector3.zero;
 
-        if (movement != Vector3.zero)
+        if (!isNoMovement)
             lastMovement = movement;
 
         tr.position += movement * Time.deltaTime * Speed;
@@ -137,11 +138,6 @@ public class Player : MonoBehaviour
 
     private void SetAnimation(int x, int y)
     {
-        //anim.SetBool("Horizontal", x != 0);
-        //anim.SetBool("Up", y == 1);
-        //anim.SetBool("Down", y == -1);
-
-
         var hz = anim.GetBool("Horizontal");
         var aU = anim.GetBool("Up");
         var aD = anim.GetBool("Down");
@@ -151,6 +147,9 @@ public class Player : MonoBehaviour
         if (aD != (y == -1)) anim.SetBool("Down", y == -1);
 
         anim.SetFloat("ImmuneTime", immuneTime);
+
+        if (x == 0 && y == 0 && immuneTime <= 0) anim.speed = 0;
+        else anim.speed = 0.5f;
     }
 
     private string AmmoString => ammo > 9 ? ammo.ToString() : $"0{ammo.ToString()}";
