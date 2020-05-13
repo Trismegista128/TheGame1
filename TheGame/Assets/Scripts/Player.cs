@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TMPro;
 using Assets.Scripts.Helpers;
 
 public class Player : MonoBehaviour
@@ -9,6 +10,7 @@ public class Player : MonoBehaviour
     public float DurationOfImmunityAfterHit;
     public int PlayerSpriteSizeInPixels;
     public GameObject BulletPrefab;
+    public TextMeshPro AmmoUI; 
 
     private Transform tr;
     private SpriteRenderer sr;
@@ -18,6 +20,8 @@ public class Player : MonoBehaviour
     private float immuneTime;
     private Vector3 lastMovement;
     private int lastDirection = -1;
+    private bool primaryWeaponSelected = true;
+    private int ammo = 48;
 
     private ShootingHelper shootingHelper;
 
@@ -32,6 +36,7 @@ public class Player : MonoBehaviour
 
         healthBarObject = GameObject.Find("Life container").GetComponent<HealthBar>();
 
+        AmmoUI.text = AmmoString;
         shootingHelper = new ShootingHelper(tr, BulletPrefab, FireRate);
     }
 
@@ -64,9 +69,26 @@ public class Player : MonoBehaviour
 
         tr.position += movement * Time.deltaTime * Speed;
 
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            primaryWeaponSelected = !primaryWeaponSelected;
+        }
+
         if (Input.GetKey(KeyCode.Space))
         {
-            shootingHelper.Fire(lastMovement, movement);
+            if(primaryWeaponSelected)
+                shootingHelper.Fire(lastMovement, movement);
+
+            else if(ammo > 0)
+            {
+                var shooted = shootingHelper.Fire(lastMovement, movement);
+                if (shooted)
+                {
+                    ammo--;
+                    AmmoUI.text = AmmoString;
+                }
+                
+            }
         }
     }
 
@@ -129,4 +151,7 @@ public class Player : MonoBehaviour
 
         anim.SetFloat("ImmuneTime", immuneTime);
     }
+
+    private string AmmoString => ammo > 9 ? ammo.ToString() : $"0{ammo.ToString()}";
+    
 }

@@ -16,7 +16,7 @@ namespace Assets.Scripts.Helpers
             this.tr = tr;
         }
 
-        public void Fire(Vector3 shootDirection, Vector2 currentMovement)
+        public bool Fire(Vector3 shootDirection, Vector2 currentMovement)
         {
             if (Time.time > fireRate + lastShoot)
             {
@@ -33,7 +33,10 @@ namespace Assets.Scripts.Helpers
                 var bullet = (Instantiate(bulletPrefab, tr.position + positionOfBullet, new Quaternion())) as GameObject;
                 bullet.GetComponent<Bullet>().Initialize(shootDirection);
                 lastShoot = Time.time;
+                return true;
             }
+
+            return false;
         }
 
         private Vector3 CalculateBulletStartingPoint(Vector3 shootDirection)
