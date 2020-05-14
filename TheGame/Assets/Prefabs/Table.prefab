@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6086642914408260900}
   - component: {fileID: 6086642914408260903}
   - component: {fileID: 1423106379113227518}
+  - component: {fileID: 1298948219246359331}
   m_Layer: 9
   m_Name: Table
   m_TagString: Obstacle
@@ -68,8 +69,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -960377187
-  m_SortingLayer: 2
+  m_SortingLayerID: 135150711
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ac64d41fe58a5db40af8d0b8bc3a2e40, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -98,3 +99,16 @@ CapsuleCollider2D:
   m_Offset: {x: 0.8431978, y: 1.4072067}
   m_Size: {x: 1.5145206, y: 2.412388}
   m_Direction: 0
+--- !u!114 &1298948219246359331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6086642914408260921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59524391adf39a14583e9200471a5509, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectHeight: 2

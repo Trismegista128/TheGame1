@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3050713660370953249}
   - component: {fileID: 3050713660370953250}
   - component: {fileID: -3895164806519430326}
+  - component: {fileID: 7043242937294651317}
   m_Layer: 11
   m_Name: Enemy-Bond
   m_TagString: Enemy
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1707983363
+  m_SortingLayerID: 135150711
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: e2f895ff607ae3b48a6c8d627d3f4f7d, type: 3}
@@ -140,3 +141,15 @@ MonoBehaviour:
   FireRate: 1
   BulletPrefab: {fileID: 7824520923232156634, guid: 7dd413ea6ab57624f85c6c1fe466400f,
     type: 3}
+--- !u!114 &7043242937294651317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3050713660370953260}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5af78332fbd2aa940adc9bbfaca9cb85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
