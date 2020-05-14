@@ -39,7 +39,14 @@ public class Player : MonoBehaviour
         AmmoUI.text = AmmoString;
         shootingHelper = new ShootingHelper(tr, BulletPrefab, FireRate);
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            primaryWeaponSelected = !primaryWeaponSelected;
+            manager.WeaponSwitch(primaryWeaponSelected);
+        }
+    }
     private void FixedUpdate()
     {
         if(healthBarObject.IsUpdateRequired)
@@ -70,18 +77,12 @@ public class Player : MonoBehaviour
 
         tr.position += movement * Time.deltaTime * Speed;
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            primaryWeaponSelected = !primaryWeaponSelected;
-            manager.WeaponSwitch(primaryWeaponSelected);
-        }
-
         if (Input.GetKey(KeyCode.Space))
         {
-            if(primaryWeaponSelected)
+            if (primaryWeaponSelected)
                 shootingHelper.Fire(lastMovement, movement);
 
-            else if(ammo > 0)
+            else if (ammo > 0)
             {
                 var shooted = shootingHelper.Fire(lastMovement, movement);
                 if (shooted)
@@ -89,7 +90,7 @@ public class Player : MonoBehaviour
                     ammo--;
                     AmmoUI.text = AmmoString;
                 }
-                
+
             }
         }
     }
