@@ -25,7 +25,7 @@ public class EnemyMovement : MonoBehaviour
     // Update is called once per frame
     public void FixedUpdate()
     {
-        var movement = Vector2.MoveTowards(Tr.position, Target.position, Speed * Time.deltaTime);
+        var movement = Vector2.MoveTowards(Tr.position, Target.position, Speed * Time.deltaTime).normalized;
         Tr.position = movement;
     }
 

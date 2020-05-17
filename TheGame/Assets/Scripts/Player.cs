@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
         FlipDirection(x);
         SetAnimation(x, y);
 
-        var movement = new Vector3(x, y, 0f);
+        var movement = new Vector3(x, y, 0f).normalized;
         var isNoMovement = movement == Vector3.zero;
 
         if (!isNoMovement)
