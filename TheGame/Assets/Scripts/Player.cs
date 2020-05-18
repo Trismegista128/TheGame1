@@ -1,27 +1,27 @@
 ﻿using UnityEngine;
 using TMPro;
 using Assets.Scripts.Helpers;
+using System;
 
 public class Player : MonoBehaviour
 {
     public int Lifes;
     public float Speed;
     public float FireRate;
-    public float DurationOfImmunityAfterHit;
     public int PlayerSpriteSizeInPixels;
     public GameObject BulletPrefab;
-    public TextMeshProUGUI AmmoUI; 
+    public TextMeshProUGUI AmmoUI;
+    public PlayerAnimation anim;
 
     private Transform tr;
     private SpriteRenderer sr;
-    private Animator anim;
     private GameManager manager;
     private HealthBar healthBarObject;
-    private float immuneTime;
     private Vector3 lastMovement;
-    private int lastDirection = -1;
-    private bool primaryWeaponSelected = true;
+    private int lastDirection = 1;
     private int ammo = 48;
+    private bool primaryWeaponSelected = true;
+    private bool isImmune = false;
 
     private ShootingHelper shootingHelper;
 
@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
     void Start()
     {
         tr = GetComponent<Transform>();
-        anim = GetComponentInChildren<Animator>();
 
         var managerObject = GameObject.FindGameObjectWithTag("GameController");
         manager = managerObject.GetComponent<GameManager>();
@@ -39,6 +38,7 @@ public class Player : MonoBehaviour
         AmmoUI.text = AmmoString;
         shootingHelper = new ShootingHelper(tr, BulletPrefab, FireRate);
     }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -47,13 +47,11 @@ public class Player : MonoBehaviour
             manager.WeaponSwitch(primaryWeaponSelected);
         }
     }
+
     private void FixedUpdate()
     {
         if(healthBarObject.IsUpdateRequired)
             healthBarObject.UpdateHealthbar(Lifes);
-
-        if (immuneTime > 0)
-            immuneTime -= Time.deltaTime;
 
         var x = 0;
         var y = 0;
@@ -67,10 +65,11 @@ public class Player : MonoBehaviour
         y = moveUp ? 1 : moveDown ? -1 : 0;
 
         FlipDirection(x);
-        SetAnimation(x, y);
 
         var movement = new Vector3(x, y, 0f).normalized;
         var isNoMovement = movement == Vector3.zero;
+
+        anim.OnMovement(movement);
 
         if (!isNoMovement)
             lastMovement = movement;
@@ -112,12 +111,13 @@ public class Player : MonoBehaviour
 
     private void LoseLife()
     {
-        if (immuneTime <= 0)
+        if (!isImmune)
         {
             if (Lifes > 1)
             {
                 Lifes--;
-                immuneTime = DurationOfImmunityAfterHit;
+                isImmune = true;
+                anim.OnHit();
             }
 
             else
@@ -127,6 +127,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void ImmuneFinished()
+    {
+        Debug.Log("Immune finished Player");
+        isImmune = false;
+    }
     private void FlipDirection(int x)
     {
         var direction = x;
@@ -135,22 +140,6 @@ public class Player : MonoBehaviour
             lastDirection = direction;
             transform.localScale = new Vector2(direction, transform.localScale.y);
         }
-    }
-
-    private void SetAnimation(int x, int y)
-    {
-        var hz = anim.GetBool("Horizontal");
-        var aU = anim.GetBool("Up");
-        var aD = anim.GetBool("Down");
-
-        if (hz != (x != 0)) anim.SetBool("Horizontal", x != 0);
-        if (aU != (y == 1)) anim.SetBool("Up", y == 1);
-        if (aD != (y == -1)) anim.SetBool("Down", y == -1);
-
-        anim.SetFloat("ImmuneTime", immuneTime);
-
-        if (x == 0 && y == 0 && immuneTime <= 0) anim.speed = 0;
-        else anim.speed = 0.5f;
     }
 
     private string AmmoString => ammo > 9 ? ammo.ToString() : $"0{ammo.ToString()}";
