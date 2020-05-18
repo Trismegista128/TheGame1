@@ -1,44 +1,32 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
+using TMPro;
 
-public class PauseMenu : MonoBehaviour
+public class EndGameMenu : MonoBehaviour
 {
-    public GameObject PauseMenuUI;
+    public GameObject EndGameMenuUI;
+    public GameManager manager;
 
     /// <summary>
     /// Commands should be ordered from top to down as presented in the UI
     /// </summary>
     public TextMeshProUGUI[] CommandsUIText;
-    public Color HighlightColor;
     public Color NormalColor;
-
-    public static bool GameIsPaused;
-
-    private GameManager manager;
+    public Color HighlightColor;
+    
     private int selectedCommandIndex;
+    private bool isGameOver;
 
     // Start is called before the first frame update
     void Start()
     {
-        var managerObject = GameObject.FindGameObjectWithTag("GameController");
-        manager = managerObject.GetComponent<GameManager>();
-        Resume();
+        isGameOver = false;
+        HideMe();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!manager.IsGamePlay) return;
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (manager.IsPaused)
-                Resume();
-            else
-                Pause();
-        }
-
-        if (manager.IsPaused)
+        if (manager.IsGameOver)
         {
             if (Input.GetKeyDown(KeyCode.W))
             {
@@ -48,6 +36,7 @@ public class PauseMenu : MonoBehaviour
                     UpdateCommandSelection();
                 }
             }
+
             if (Input.GetKeyDown(KeyCode.S))
             {
                 if (selectedCommandIndex < CommandsUIText.Length - 1)
@@ -56,12 +45,18 @@ public class PauseMenu : MonoBehaviour
                     UpdateCommandSelection();
                 }
             }
+
             if (Input.GetKeyDown(KeyCode.KeypadEnter) ||
                 Input.GetKeyDown(KeyCode.Space))
             {
                 ExecuteCommand();
             }
         }
+    }
+
+    public void ShowGameOverMenu()
+    {
+        ShowMe();
     }
 
     private void UpdateCommandSelection()
@@ -71,32 +66,26 @@ public class PauseMenu : MonoBehaviour
             uiComponent.color = NormalColor;
         }
 
-        CommandsUIText[selectedCommandIndex].color = HighlightColor; ;
+        CommandsUIText[selectedCommandIndex].color = HighlightColor;
     }
-
     private void ExecuteCommand()
     {
         if (selectedCommandIndex < 0 || selectedCommandIndex >= CommandsUIText.Length)
             throw new System.ArgumentOutOfRangeException($"{nameof(selectedCommandIndex)}", $"The value of index is out of supported range. Value of {(selectedCommandIndex)} in a range (0-{CommandsUIText.Length})");
 
-        if(selectedCommandIndex == 0) Resume();
-        if(selectedCommandIndex == 1) manager.Restart();
-        if(selectedCommandIndex == 2) manager.QuitGame();
+        if (selectedCommandIndex == 0) manager.Restart();
+        if (selectedCommandIndex == 1) manager.QuitGame();
     }
 
-    private void Pause()
+    private void HideMe()
     {
-        Time.timeScale = 0;
+        EndGameMenuUI.SetActive(false);
+    }
+
+    private void ShowMe()
+    {
         selectedCommandIndex = 0;
+        EndGameMenuUI.SetActive(true);
         UpdateCommandSelection();
-        manager.IsPaused = true;
-        PauseMenuUI.SetActive(true);
-    }
-
-    private void Resume()
-    {
-        Time.timeScale = 1;
-        manager.IsPaused = false;
-        PauseMenuUI.SetActive(false);
     }
 }

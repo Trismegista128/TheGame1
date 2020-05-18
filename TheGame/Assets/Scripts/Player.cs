@@ -50,6 +50,9 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (manager.IsPaused) return;
+        if (manager.IsGameOver) return;
+
         if(healthBarObject.IsUpdateRequired)
             healthBarObject.UpdateHealthbar(Lifes);
 

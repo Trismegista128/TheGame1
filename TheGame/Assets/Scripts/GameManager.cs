@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Sprite ActiveWeaponSprite;
     public Sprite InactiveWeaponSprite;
     public int CurrentSceneIndex;
+    public EndGameMenu endGameMenu;
 
     private int enemiesCount;
     private Dictionary<int, GameObject> doors;
@@ -30,7 +31,16 @@ public class GameManager : MonoBehaviour
             SetupDoors();
         }
     }
+
+    private void OnLevelWasLoaded(int level)
+    {
+        IsPaused = false;
+        IsGameOver = false;
+    }
+
     public bool IsGamePlay => CurrentSceneIndex != 0;
+    public bool IsPaused;
+    public bool IsGameOver;
 
     public int EnemiesCount()
     {
@@ -65,7 +75,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         //Load title screen
-        SceneManager.LoadScene(0);
+        IsGameOver = true;
+        endGameMenu.ShowGameOverMenu();
     }
 
     public void Restart()
@@ -77,7 +88,7 @@ public class GameManager : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 
     private void SetupDoors()
