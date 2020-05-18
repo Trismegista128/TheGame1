@@ -55,6 +55,11 @@ public class GameManager : MonoBehaviour
             CurrentSceneIndex++;
             SceneManager.LoadScene(CurrentSceneIndex);
         }
+        else
+        {
+            //should be end game.
+            GameOver();
+        }
     }
 
     public void GameOver()
