@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public float DurationOfImmunityAfterHit;
     public int PlayerSpriteSizeInPixels;
     public GameObject BulletPrefab;
-    public TextMeshPro AmmoUI; 
+    public TextMeshProUGUI AmmoUI; 
 
     private Transform tr;
     private SpriteRenderer sr;

@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public int PixelsInUnit = 10;
-    public SpriteRenderer PrimaryWeaponSlot;
-    public SpriteRenderer SecondaryWeaponSlot;
+    public Image PrimaryWeaponSlot;
+    public Image SecondaryWeaponSlot;
     public Sprite ActiveWeaponSprite;
     public Sprite InactiveWeaponSprite;
 

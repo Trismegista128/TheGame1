@@ -8,10 +8,9 @@ public class PauseMenu : MonoBehaviour
     /// <summary>
     /// Commands should be ordered from top to down as presented in the UI
     /// </summary>
-    public TextMeshPro[] CommandsUIText;
-
-    public Material LightMaterial;
-    public Material DarkMaterial;
+    public TextMeshProUGUI[] CommandsUIText;
+    public Color HighlightColor;
+    public Color NormalColor;
 
     public static bool GameIsPaused;
 
@@ -76,19 +75,12 @@ public class PauseMenu : MonoBehaviour
 
         foreach (var uiComponent in CommandsUIText)
         {
-            UpdateMaterial(uiComponent, DarkMaterial);
+            uiComponent.color = NormalColor;
         }
 
-        UpdateMaterial(CommandsUIText[selectedCommandIndex], LightMaterial);
+        CommandsUIText[selectedCommandIndex].color = HighlightColor;
     }
 
-    private void UpdateMaterial(TextMeshPro textObject, Material mat)
-    {
-        var mRenderer = textObject.GetComponent<MeshRenderer>();
-        var materials = mRenderer.materials;
-        materials[0] = mat;
-        mRenderer.materials = materials;
-    }
     private void ExecuteCommand()
     {
         Debug.Log($"Execute called, index is {selectedCommandIndex}");

@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
     public bool IsUpdateRequired;
 
-    private Dictionary<string, SpriteRenderer> hearths;
+    private Dictionary<string, Image> hearths;
     // Start is called before the first frame update
     void Start()
     {
-        hearths = new Dictionary<string, SpriteRenderer>();
-        var allRenderers = gameObject.GetComponentsInChildren<SpriteRenderer>().ToList();
+        hearths = new Dictionary<string, Image>();
+        var allRenderers = gameObject.GetComponentsInChildren<Image>().ToList();
 
         foreach(var component in allRenderers)
         {
