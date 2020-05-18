@@ -10,19 +10,27 @@ public class GameManager : MonoBehaviour
     public Image SecondaryWeaponSlot;
     public Sprite ActiveWeaponSprite;
     public Sprite InactiveWeaponSprite;
+    public int CurrentSceneIndex;
 
     private int enemiesCount;
     private Dictionary<int, GameObject> doors;
-    
+    private int maxLevels;
 
     // Start is called before the first frame update
     void Start()
     {
-        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
-        enemiesCount = enemies?.Length ?? 0;
+        CurrentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        maxLevels = SceneManager.sceneCountInBuildSettings;
 
-        SetupDoors();
+        if (CurrentSceneIndex != 0)
+        {
+            var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            enemiesCount = enemies?.Length ?? 0;
+
+            SetupDoors();
+        }
     }
+    public bool IsGamePlay => CurrentSceneIndex != 0;
 
     public int EnemiesCount()
     {
@@ -42,11 +50,16 @@ public class GameManager : MonoBehaviour
 
     public void NextLevel()
     {
-        SceneManager.LoadScene(0);
+        if (maxLevels > CurrentSceneIndex + 1)
+        {
+            CurrentSceneIndex++;
+            SceneManager.LoadScene(CurrentSceneIndex);
+        }
     }
 
     public void GameOver()
     {
+        //Load title screen
         SceneManager.LoadScene(0);
     }
 
@@ -54,7 +67,7 @@ public class GameManager : MonoBehaviour
     {
         //To change to load current scene
         //To restart with the stats user had at the beggining of this level?
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(CurrentSceneIndex);
     }
 
     public void QuitGame()
