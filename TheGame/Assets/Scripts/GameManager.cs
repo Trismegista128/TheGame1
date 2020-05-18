@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     private int enemiesCount;
     private Dictionary<int, GameObject> doors;
-    private bool isPaused;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -21,23 +21,6 @@ public class GameManager : MonoBehaviour
         enemiesCount = enemies?.Length ?? 0;
 
         SetupDoors();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (isPaused)
-            {
-                Time.timeScale = 1;
-                isPaused = false;
-            }
-            else
-            {
-                Time.timeScale = 0;
-                isPaused = true;
-            }
-        }
     }
 
     public int EnemiesCount()
@@ -64,6 +47,18 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene(0);
+    }
+
+    public void Restart()
+    {
+        //To change to load current scene
+        //To restart with the stats user had at the beggining of this level?
+        SceneManager.LoadScene(0);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     private void SetupDoors()

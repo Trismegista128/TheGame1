@@ -217,9 +217,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
-  m_Name: ARCADE3
+  m_Name: Arcade
   m_EditorClassIdentifier: 
-  hashCode: 610964451
+  hashCode: -1847117328
   material: {fileID: -3870124040369978758}
   materialHashCode: -1348356600
   m_Version: 1.1.0
