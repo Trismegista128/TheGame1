@@ -129,11 +129,6 @@ public class Player : MonoBehaviour
         AmmoUI.text = AmmoString;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Enemy")
-            LoseLife();
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -142,6 +137,9 @@ public class Player : MonoBehaviour
             LoseLife();
             Destroy(collision.transform.gameObject);
         }
+
+        if (collision.gameObject.tag == "Enemy")
+            LoseLife();
     }
 
     private void LoseLife()
@@ -156,7 +154,10 @@ public class Player : MonoBehaviour
             }
 
             else
-                manager.GameOver();
+            {
+                manager.BetweenDeadAndGameOver();
+                anim.OnDead();
+            }
 
             healthBarObject.UpdateHealthbar(Lifes);
         }
@@ -167,6 +168,11 @@ public class Player : MonoBehaviour
         Debug.Log("Immune finished Player");
         isImmune = false;
     }
+    public void DieFinished()
+    {
+        manager.GameOver();
+    }
+
     private void FlipDirection(int x)
     {
         var direction = x;

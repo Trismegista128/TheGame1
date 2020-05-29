@@ -17,18 +17,17 @@ public class PlayerAnimation : MonoBehaviour
 
     public void OnDead()
     {
-        //To be implemented
+        animator.SetTrigger("Died");
     }
 
     public void OnImmuneAnimationFinish()
     {
-        Debug.Log("On immune finished animationforplayer");
         player.ImmuneFinished();
     }
 
     public void OnDieAnimationFisnih()
     {
-        //To be implemented
+        player.DieFinished();
     }
 
     private void SetMovementAnimation(float x, float y)

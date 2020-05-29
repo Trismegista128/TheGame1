@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using Pathfinding;
 
 public class GameManager : MonoBehaviour
 {
@@ -72,10 +74,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void BetweenDeadAndGameOver()
+    {
+        var enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        var enemiesAi = enemies.Select(x => x.gameObject.GetComponent<AIPath>()).ToList();
+        IsGameOver = true;
+
+        foreach (var enemy in enemiesAi)
+        {
+            enemy.canMove = false;
+        }
+    }
     public void GameOver()
     {
         //Load title screen
-        IsGameOver = true;
         endGameMenu.ShowGameOverMenu();
     }
 
