@@ -10,6 +10,7 @@ TagManager:
   - EnemyBullet
   - Walls
   - Obstacle
+  - Item
   layers:
   - Default
   - TransparentFX

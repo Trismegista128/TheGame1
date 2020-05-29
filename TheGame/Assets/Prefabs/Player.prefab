@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 501801531}
   - component: {fileID: 501801530}
   - component: {fileID: 1047420733682599158}
+  - component: {fileID: 2023659976}
   m_Layer: 11
   m_Name: GFX
   m_TagString: Untagged
@@ -114,6 +115,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5af78332fbd2aa940adc9bbfaca9cb85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2023659976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 501801528}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24903b742328265468585058aad7b40b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 501801531}
+  player: {fileID: 5885595276193718851}
 --- !u!1 &5885595276193718855
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,6 +141,7 @@ GameObject:
   - component: {fileID: 5885595276193718909}
   - component: {fileID: 5885595276193718908}
   - component: {fileID: 5885595276193718851}
+  - component: {fileID: 445527393700741841}
   m_Layer: 11
   m_Name: Player
   m_TagString: Player
@@ -197,11 +213,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d064a9c8d5fa07c48a5698845405a088, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 5
   Lifes: 5
   Speed: 10
   FireRate: 0.5
-  DurationOfImmunityAfterHit: 3
   PlayerSpriteSizeInPixels: 0
   BulletPrefab: {fileID: 8808407274797901952, guid: b4fff8b45fb136440b14252042232abc,
     type: 3}
   AmmoUI: {fileID: 0}
+  anim: {fileID: 2023659976}
+--- !u!114 &445527393700741841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5885595276193718855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28d0e4cb3fa3c5341ad0b63e5938002a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerScript: {fileID: 5885595276193718851}

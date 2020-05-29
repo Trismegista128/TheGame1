@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using TMPro;
 using Assets.Scripts.Helpers;
+using Assets.Scripts.Types;
 using System;
 
 public class Player : MonoBehaviour
 {
+    public int MaxHealth = 5;
+    [HideInInspector]
     public int Lifes;
     public float Speed;
     public float FireRate;
@@ -19,8 +22,9 @@ public class Player : MonoBehaviour
     private HealthBar healthBarObject;
     private Vector3 lastMovement;
     private int lastDirection = 1;
-    private int ammo = 48;
+    private int ammo = 0;
     private bool primaryWeaponSelected = true;
+    private bool hasSecondaryWeapon = false;
     private bool isImmune = false;
 
     private ShootingHelper shootingHelper;
@@ -83,18 +87,46 @@ public class Player : MonoBehaviour
         {
             if (primaryWeaponSelected)
                 shootingHelper.Fire(lastMovement, movement);
-
-            else if (ammo > 0)
+            else
             {
-                var shooted = shootingHelper.Fire(lastMovement, movement);
-                if (shooted)
-                {
-                    ammo--;
-                    AmmoUI.text = AmmoString;
-                }
 
+                if (ammo > 0)
+                {
+                    var shooted = shootingHelper.Fire(lastMovement, movement);
+                    if (shooted)
+                    {
+                        ammo--;
+                        AmmoUI.text = AmmoString;
+                    }
+
+                }
+                else
+                {
+                    hasSecondaryWeapon = false;
+                }
             }
         }
+    }
+
+    public void Heal(float value)
+    {
+        if (Lifes == MaxHealth) return;
+
+        if (Lifes + (int)value >= MaxHealth)
+        {
+            Lifes = MaxHealth;
+        }
+        else
+        {
+            Lifes += (int)value;
+        }
+    }
+
+    public void AddAmmo(float value)
+    {
+        hasSecondaryWeapon = true;
+        ammo += (int)value;
+        AmmoUI.text = AmmoString;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
