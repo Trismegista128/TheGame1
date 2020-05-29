@@ -4,6 +4,7 @@ public class EnemyHealth : MonoBehaviour
 {
     public float HP;
     public GameManager manager;
+    public EnemyDropItem dropper;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,7 @@ public class EnemyHealth : MonoBehaviour
         }
         else
         {
+            dropper.Drop();
             manager.EnemyKilled();
             Destroy(this.gameObject);
         }
